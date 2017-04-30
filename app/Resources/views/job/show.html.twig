@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ job.titluJob }}
+                <small>#{{ job.id }}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url('homepage') }}">Home</a>
+                </li>
+                <li class="active">Show</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and job.user.id == app.user.id%}
+            <span class="btn btn-default pull-right" style="margin-left: 10px;">
+                <a href="{{ path('jobs_edit', { 'id': job.id }) }}">Edit</a>
+            </span>
+            <span class="pull-right">
+                {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </span>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+
+    <p>{{ job.descriere }}</p>
+    <table>
+        <tbody>
+            <tr>
+                <th>Data publicarii</th>
+                <td>{% if job.dataPublicarii %}{{ job.dataPublicarii|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ job.city.cityName }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ job.user.username }}</td>
+            </tr>
+            <tr>
+                <th>Activ</th>
+                <td>{% if job.esteActiv %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tags">
+        <span class="btn-info">
+            <a href="{{ path('jobs_index') }}">Back to the list</a>
+        </span>
+    </div>
+    <div class="clear"></div>
+
+{% endblock %}

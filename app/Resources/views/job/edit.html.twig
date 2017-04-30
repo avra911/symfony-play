@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Edit
+                <small>#{{ job.id }}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url('homepage') }}">Home</a>
+                </li>
+                <li class="active">Edit</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and job.user.id == app.user.id%}
+            <span class="pull-right">
+                {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </span>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Save" />
+    {{ form_end(edit_form) }}
+
+
+    <div class="tags">
+        <span class="btn-info">
+            <a href="{{ path('jobs_index') }}">Back to the list</a>
+        </span>
+    </div>
+    <div class="clear"></div>
+
+{% endblock %}

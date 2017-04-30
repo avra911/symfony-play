@@ -1,0 +1,48 @@
+<div class="span8">
+    {% for job in jobs %}
+        <h4>
+            {% if job.esteActiv == false %}
+                <i class="fa fa-toggle-off pull-right"></i>
+            {% endif %} {{ job.titluJob }}
+        </h4>
+        <p>{{ job.descriere }}</p>
+        <div>
+            <div class="tags">
+                <span class="btn" style="padding-left: 0px">
+                    by {{ job.user.username }}
+                </span>
+
+                <span class="btn">
+                    {{ job.dataPublicarii|date('Y-m-d H:i:s') }}
+                </span>
+
+                <span class="btn-info pull-right">
+                    <a href="{{ path('jobs_show', { 'id': job.id }) }}">Read more</a>
+                </span>
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and job.user.id == app.user.id%}
+                    <span class="btn-info pull-right">
+                    <a href="{{ path('jobs_edit', { 'id': job.id }) }}">edit</a>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <hr>
+    {% endfor %}
+</div>
+
+<!-- Call to Action Section -->
+<div class="well">
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe,
+                vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-default btn-block" href="{{ path('jobs_new') }}">Create a new job</a>
+        </div>
+    </div>
+</div>

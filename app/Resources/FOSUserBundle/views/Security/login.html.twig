@@ -1,0 +1,20 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">User
+                <small>Login</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url('homepage') }}">Home</a>
+                </li>
+                <li class="active">Login</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
