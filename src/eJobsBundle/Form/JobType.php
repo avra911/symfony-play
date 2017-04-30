@@ -20,8 +20,11 @@ class JobType extends AbstractType
             ->add('titluJob', null, array(
                 'required' => true,
             ))
-            ->add('descriere', null, array(
+            ->add('city', EntityType::class, array(
+                'class' => 'eJobsBundle\Entity\Oras',
+                'label' => 'City',
                 'required' => true,
+                'choice_label' => 'city_name',
             ))
             ->add('dataPublicarii', null, array(
                 'required' => true,
@@ -29,11 +32,9 @@ class JobType extends AbstractType
             ->add('esteActiv', null, array(
                 'required' => false,
             ))
-            ->add('city', EntityType::class, array(
-                'class' => 'eJobsBundle\Entity\Oras',
-                'label' => 'City',
+            ->add('descriere', null, array(
                 'required' => true,
-                'choice_label' => 'city_name',
+                'attr' => array('rows' => 20),
             ));
     }
     

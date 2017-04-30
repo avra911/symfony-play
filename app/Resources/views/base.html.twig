@@ -83,15 +83,19 @@
 
 <!-- Page Content -->
 <div class="container">
-    {% block heading %}{% endblock %}
-
     {% for type, flash_messages in app.session.flashBag.all %}
         {% for flash_message in flash_messages %}
-            <div class="flash-{{ type }}">
+            <br />
+            <div class="alert alert-{{ type }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 {{ flash_message }}
             </div>
         {% endfor %}
     {% endfor %}
+
+    {% block heading %}{% endblock %}
 
     {% block body %}{% endblock %}
 

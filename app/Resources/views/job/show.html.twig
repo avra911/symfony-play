@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ job.city.cityName }} | Detalii: {{ job.titluJob }}{% endblock %}
+
 {% block heading %}
     <div class="row">
         <div class="col-lg-12">
@@ -7,8 +9,8 @@
                 <small>#{{ job.id }}</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{ url('homepage') }}">Home</a>
-                </li>
+                <li><a href="{{ url('homepage') }}">Home</a></li>
+                <li><a href="{{ path('jobs_index') }}">Jobs</a></li>
                 <li class="active">Show</li>
             </ol>
         </div>
@@ -30,27 +32,22 @@
     </div>
     <div class="clear"></div>
 
-    <p>{{ job.descriere }}</p>
-    <table>
-        <tbody>
-            <tr>
-                <th>Data publicarii</th>
-                <td>{% if job.dataPublicarii %}{{ job.dataPublicarii|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ job.city.cityName }}</td>
-            </tr>
-            <tr>
-                <th>User</th>
-                <td>{{ job.user.username }}</td>
-            </tr>
-            <tr>
-                <th>Activ</th>
-                <td>{% if job.esteActiv %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+    <p><b>Data</b>: {{ job.dataPublicarii|date('Y-m-d H:i:s') }}</p>
+    <p><b>Author</b>: {{ job.user.username }}</p>
+    <p><b>City</b>: {{ job.city.cityName }}</p>
+
+    <p>
+        <b>Activ</b>:
+        {% if job.esteActiv == false %}
+            <i class="fa fa-toggle-off" style="color: red;"></i>
+        {% else %}
+            <i class="fa fa-toggle-on" style="color: green;"></i>
+        {% endif %}
+    </p>
+
+    <hr>
+
+    <p>{{ job.descriere|nl2br }}</p>
 
     <div class="tags">
         <span class="btn-info">

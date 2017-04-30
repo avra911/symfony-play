@@ -1,34 +1,29 @@
-<div class="span8">
+<div class="row">
     {% for job in jobs %}
-        <h4>
-            {% if job.esteActiv == false %}
-                <i class="fa fa-toggle-off pull-right"></i>
-            {% endif %} {{ job.titluJob }}
-        </h4>
-        <p>{{ job.descriere }}</p>
-        <div>
-            <div class="tags">
-                <span class="btn" style="padding-left: 0px">
-                    by {{ job.user.username }}
-                </span>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        {% if job.esteActiv == false %}
+                            <i class="fa fa-toggle-off pull-right" style="color: red;"></i>
+                        {% endif %}
+                        {{ job.titluJob|truncate(30, true)|raw }}</p>
+                    </h4>
+                </div>
 
-                <span class="btn">
-                    {{ job.dataPublicarii|date('Y-m-d H:i:s') }}
-                </span>
+                <div class="panel-body">
+                    <p><b>Data</b>: {{ job.dataPublicarii|date('Y-m-d H:i:s') }}</p>
+                    <p><b>Author</b>: {{ job.user.username }}</p>
+                    <p><b>City</b>: {{ job.city.cityName }}</p>
+                    <br />
+                    <a href="{{ path('jobs_show', { 'id': job.id }) }}" class="btn btn-default">Read More</a>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and job.user.id == app.user.id%}
+                        <a href="{{ path('jobs_edit', { 'id': job.id }) }}" class="btn btn-link">edit</a>
+                    {% endif %}
 
-                <span class="btn-info pull-right">
-                    <a href="{{ path('jobs_show', { 'id': job.id }) }}">Read more</a>
-                </span>
-
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and job.user.id == app.user.id%}
-                    <span class="btn-info pull-right">
-                    <a href="{{ path('jobs_edit', { 'id': job.id }) }}">edit</a>
-                </span>
-                {% endif %}
+                </div>
             </div>
         </div>
-        <div class="clear"></div>
-        <hr>
     {% endfor %}
 </div>
 

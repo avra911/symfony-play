@@ -37,7 +37,7 @@ class DefaultController extends Controller
             $em->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 "Jobul a fost postat corect"
             );
             return $this->redirectToRoute('jobs_index');

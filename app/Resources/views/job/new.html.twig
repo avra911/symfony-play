@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Adauga Job{% endblock %}
+
 {% block heading %}
     <div class="row">
         <div class="col-lg-12">
@@ -7,8 +9,8 @@
                 <small>creation</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{ url('homepage') }}">Home</a>
-                </li>
+                <li><a href="{{ url('homepage') }}">Home</a></li>
+                <li><a href="{{ path('jobs_index') }}">Jobs</a></li>
                 <li class="active">New</li>
             </ol>
         </div>
@@ -18,7 +20,7 @@
 {% block body %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <button type="submit" type="button" class="btn btn-success pull-right">Create</button>
     {{ form_end(form) }}
 
     <ul>
